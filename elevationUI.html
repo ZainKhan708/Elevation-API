@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Points on Google Earth Map</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV0SmMz0REk_l-34ewVW2NHsn7VlzlAYs"></script>
+    <style>
+      /* Styling for the map container */
+      #map {
+        height: 500px;
+        width: 100%;
+      }
+
+      /* Styling for the form container */
+      #form {
+        width: 300px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        text-align: center;
+      }
+
+      /* Styling for the input fields */
+      input[type="text"] {
+        padding: 10px;
+        margin: 10px 0;
+        width: 100%;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+
+      /* Styling for the submit button */
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        margin: 10px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      /* Styling for the markers on the map */
+      .marker {
+        background-color: #ff0000;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="form">
+      <form>
+        <label for="latitude">Latitude:</label>
+        <input type="text" id="latitude" name="latitude" placeholder="Enter latitude">
+        <label for="longitude">Longitude:</label>
+        <input type="text" id="longitude" name="longitude" placeholder="Enter longitude">
+        <input type="submit" value="Create Point">
+      </form>
+    </div>
+    <script>
+      // Initialize the map and set the center to a specific location
+      var map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 37.788022, lng: -122.399797 },
+        zoom: 15
+      });
+
+      // Add event listener for the form submission
+      document.querySelector("form").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Get the coordinates from the input fields
+        var lat = document.getElementById("latitude").value;
+        var lng = document.getElementById("longitude").value;
+
+        // Create a marker on the map at the specified coordinates
+        var marker = new google.maps.Marker({
+          position: { lat: parseFloat(lat), lng: parseFloat(lng) },
+          map: map,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 8,
+            
